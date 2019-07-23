@@ -12,7 +12,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http'
 
+import { MesaService } from './services/mesa.service'
 // Import containers
 import { DefaultLayoutComponent } from './containers';
 
@@ -54,7 +56,9 @@ import { ChartsModule } from 'ng2-charts';
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    HttpClientModule 
+
   ],
   declarations: [
     AppComponent,
@@ -67,7 +71,8 @@ import { ChartsModule } from 'ng2-charts';
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
-  }],
+  },
+  MesaService],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
