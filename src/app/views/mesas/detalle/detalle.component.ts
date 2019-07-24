@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { MesaService} from "./../../../services/mesa.service"
 import { ComandaService} from "./../../../services/comanda.service"
+import { FormGroup, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-detalle',
   templateUrl: './detalle.component.html',
@@ -11,6 +12,16 @@ export class DetalleComponent implements OnInit {
  id:any
  public data:any
  public mesa:any
+ selected:any;
+
+ public readonly countries = ['Minsk', 'Berlin', 'Moscow', 'NYC'];
+ public locationValue = 'Minsk';
+ testForm: FormGroup;
+ optionsSelect = [
+   { value: '1', label: 'Option 1' },
+   { value: '2', label: 'Option 2' },
+   { value: '3', label: 'Option 3' },
+ ];
   constructor(private rutaActiva: ActivatedRoute, private comandaService:ComandaService, private mesaService:MesaService) { }
 
   ngOnInit() {
@@ -29,6 +40,9 @@ export class DetalleComponent implements OnInit {
  
    })
   })
+  }
+  public changeCountry(country) {
+    this.locationValue=country
   }
 
 }

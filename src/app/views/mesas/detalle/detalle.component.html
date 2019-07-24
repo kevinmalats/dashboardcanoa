@@ -1,26 +1,58 @@
-<div class="row">
-    <div class="col-md-4">
-            <label for="">Numero de Mesa: {{mesa.numero_mesa}}</label>
-    </div>
-    <div class="col-md-4">
-            <label for="">Estado de la Mesa: {{mesa.estado}}</label>
-    </div>
-    
-</div>
-<div class="row">
-    <ul>
 
- 
-        <ng-container *ngFor="let item of data">
-        <div >
-              <li> {{item.nombre}}</li>
-              
+<div class="app-body">
+    <main class="main d-flex align-items-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 mx-auto">
+            <div class="card mx-4">
+              <div class="card-body p-4">
                
-        
-        
-                <li> {{item.estado}}</li>
-                
+                  <h1>Mesas</h1>
+                  <p class="text-muted">Comanda de la mesa  {{mesa.numero_mesa}}</p>
+                  <p class="text-muted">Estado de la Mesa: {{mesa.estado}}</p>
+          
+                  <material-angular-select [data]="countries"
+                  [label]="'Location'"
+                  [name]="'country'"
+                  [currentValue]="locationValue"
+                  (selectedValue)="changeCountry($event)"></material-angular-select>
+              </div>
+              <ng-container *ngFor="let item of data">
+                    <div class="input-group mb-3">
+                          
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Plu</span>
+                      </div>
+                      {{item.nombre}}                 
+                      </div>
+                      <div class="input-group mb-3">
+                          
+                      <div class="input-group-prepend">
+                      <span class="input-group-text">Cantidad</span>
+                      </div>
+                        {{item.cantidad_plu}}                 
+                      </div>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Detalle</span>
+                          </div>
+                                {{item.detalle_plu}}                 
+                          </div>
+                  </ng-container>
+                 
+            </div>
+          </div>
         </div>
-    </ng-container>
-</ul>
-</div>
+      </div>
+    </main>
+  </div>
+  
+
+  <form [formGroup]="testForm">
+        <div class="row">
+          <div class="col-md-6">
+            <mdb-select [options]="optionsSelect" formControlName="testSelect" placeholder="Choose your option"></mdb-select>
+            <label>Example label</label>
+          </div>
+        </div>
+      </form>
