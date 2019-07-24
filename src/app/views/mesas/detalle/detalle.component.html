@@ -7,15 +7,34 @@
             <div class="card mx-4">
               <div class="card-body p-4">
                
-                  <h1>Mesas</h1>
-                  <p class="text-muted">Comanda de la mesa  {{mesa.numero_mesa}}</p>
+              
+                  <div *ngIf="mesa">
+                  <h1>Mesa  {{mesa.numero_mesa}}</h1>
                   <p class="text-muted">Estado de la Mesa: {{mesa.estado}}</p>
-          
-                  <material-angular-select [data]="countries"
+                  </div>
+                  <div *ngIf="estado">
+                  <p class="text-muted">Estado de la Comanda: {{comandaEstado.name}}</p>
+                 
+                        <label>Cambiar estado a: </label> <button (click)="actualizar()"> {{selectedValue.name}}</button>
+    
+                 </div>             
+                  <!-- <form [formGroup]="testForm">
+                    <div class="row">
+                      <div class="col-md-6">
+                          
+                              <select [(ngModel)]="selectedValue">
+                            <option value="" [selected]="selectedValue.id"> {{selectedValue.name}} </option>
+                            <option *ngFor="let c of estados" [value]="c.id">{{c.name}}</option>
+                       </select>
+                     
+                      </div>
+                    </div>
+                  </form> -->
+                  <!-- <material-angular-select [data]="countries"
                   [label]="'Location'"
                   [name]="'country'"
                   [currentValue]="locationValue"
-                  (selectedValue)="changeCountry($event)"></material-angular-select>
+                  (selectedValue)="changeCountry($event)"></material-angular-select> -->
               </div>
               <ng-container *ngFor="let item of data">
                     <div class="input-group mb-3">
@@ -48,11 +67,4 @@
   </div>
   
 
-  <form [formGroup]="testForm">
-        <div class="row">
-          <div class="col-md-6">
-            <mdb-select [options]="optionsSelect" formControlName="testSelect" placeholder="Choose your option"></mdb-select>
-            <label>Example label</label>
-          </div>
-        </div>
-      </form>
+  

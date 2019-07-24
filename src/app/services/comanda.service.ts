@@ -13,4 +13,10 @@ export class ComandaService {
     return this.httpClient.post(this.URI+"/idMesa",{mesa:idMesa})
 
 }
+public update(body){
+    
+  return this.httpClient.post(this.URI+"/updateEstado",{datos:body})
+
+}
+
 }
