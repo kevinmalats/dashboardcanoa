@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { MesaService } from './../../services/mesa.service'
 
+import { environment } from "./../../../environments/environment";
+import * as io from 'socket.io-client';
+import * as Rx from "rxjs";
 @Component({
   selector: 'app-mesas',
   templateUrl: './mesas.component.html',
   styleUrls: ['./mesas.component.scss']
 })
 export class MesasComponent implements OnInit {
+  private socket;
 data:any
   constructor(private mesaService:MesaService) { }
   representsStates(){
@@ -27,6 +31,7 @@ data:any
     });
   }
   ngOnInit() {
+    this.connect()
     this.mesaService.getMesas()
     .subscribe(response=>{
      
@@ -38,5 +43,10 @@ data:any
   }
 detalle(id){
 
+}
+connect() {
+  this.socket = io(environment.baseUrl);
+  this.socket.emit("new user", "user");
+  
 }
 }
