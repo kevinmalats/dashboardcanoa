@@ -31,7 +31,7 @@ data:any
     });
   }
   ngOnInit() {
-    this.connect()
+    
     this.mesaService.getMesas()
     .subscribe(response=>{
      
@@ -44,9 +44,5 @@ data:any
 detalle(id){
 
 }
-connect() {
-  this.socket = io(environment.baseUrl);
-  this.socket.emit("new user", "user");
-  
-}
+
 }

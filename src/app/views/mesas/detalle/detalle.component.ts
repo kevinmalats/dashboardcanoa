@@ -3,6 +3,9 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { MesaService} from "./../../../services/mesa.service"
 import { ComandaService} from "./../../../services/comanda.service"
 import { FormGroup, FormControl } from '@angular/forms';
+import { environment } from "./../../../../environments/environment";
+import * as io from 'socket.io-client';
+import * as Rx from "rxjs";
 @Component({
   selector: 'app-detalle',
   templateUrl: './detalle.component.html',
@@ -10,6 +13,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class DetalleComponent implements OnInit {
  id:any
+ private socket;
  public data:any
  public mesa:any
  estado:string;
@@ -33,58 +37,21 @@ selectedValue =  null
 
   ngOnInit() {
  this.id=this.rutaActiva.snapshot.params.id
+ this.connect()
  console.log("estamos activo"+this.id)
   this.mesaService.getMesaById(this.id)
   .subscribe(response=>{
    this.mesa=response
    this.mesa=this.mesa.mesa[0]
+   
    console.log(this.mesa)
-   this.comandaService.getComandaByMesa(this.id)
-   .subscribe(response=>{
-    this.data=response
-    this.data=this.data.plu
-    console.log(this.data[0].estado)
-    if(this.data.length>0){
-      console.log("entre")
-      this.estado=this.data[0].estado
-      this.id=this.data[0].id
-      console.log(this.estado)
-      let newElement={
-        id:this.estado,
-        name:this.reemplazarNombre(this.estado)
-      }
-      this.comandaEstado=newElement;
-      this.selectedValue=newElement
-      let cont=0;
-      this.estados.forEach(element => {
-        if(element.id==this.selectedValue.id){
-          let nuevo=this.estados.indexOf(element)
-          if(nuevo+1<this.estados.length){
-            this.selectedValue=this.estados[nuevo+1];
-          }else{
-            this.selectedValue=this.estados[nuevo];
-          }
-          
-          console.log("iguales")
-          console.log( this.selectedValue)
-           //this.estados.splice(cont,1)
-           console.log(this.estados)
-         
-           return;
-          }
-          cont++;
-
-      });
-    
-    }
- 
- 
-   })
+     this.getComanda()
   })
   }
   actualizar(){
-    if(this.selectedValue.id!="t"){
-
+    console.log("no es t")
+   
+      console.log("t")
     
     let body={
      id_comanda:this.id,
@@ -92,9 +59,12 @@ selectedValue =  null
     }
     this.comandaService.update(body)
     .subscribe(response=>{
-      console.log(response)
+  
+      let data:any=response
+      console.log(data.result)
+      
     })
-  }
+  
   }
 reemplazarNombre(estado){
   let valor=null
@@ -116,6 +86,122 @@ switch(estado){
 
 }
 return valor;
+}
+getComanda(){
+  this.comandaService.getComandaByMesa(this.id)
+  .subscribe(response=>{
+   this.data=response
+   this.data=this.data.plu
+  
+   if(this.data.length>0){
+     console.log("entre")
+     this.estado=this.data[0].estado
+     this.id=this.data[0].id
+    
+     let newElement={
+       id:this.estado,
+       name:this.reemplazarNombre(this.estado)
+     }
+     this.comandaEstado=newElement;
+     this.selectedValue=newElement
+     let cont=0;
+     let bander=true
+     this.estados.forEach(element => {
+       console.log("cont"+cont)
+       console.log(element.id,this.selectedValue.id)
+       if(element.id==this.selectedValue.id && bander==true){
+         let nuevo=this.estados.indexOf(element)
+         console.log("nuevo")
+         console.log(nuevo)
+         console.log(this.estados.length)
+         if(nuevo+1<this.estados.length){
+           this.selectedValue=this.estados[nuevo+1];
+         }else{
+           console.log("else")
+           console.log(nuevo)
+           this.selectedValue=this.estados[nuevo];
+         }
+         
+         console.log("iguales")
+         console.log( this.selectedValue)
+          //this.estados.splice(cont,1)
+          console.log(this.estados)
+        
+          bander=false
+         }
+         cont++;
+         
+     });
+   
+   }
+
+
+  })
+}
+
+connect():Rx.Subject<MessageEvent> {
+  
+    this.socket = io(environment.baseUrl);
+  
+    this.socket.emit("wating","hola enfermera" )
+    this.socket.on("result", (result)=>{
+      console.log("resultado socket")
+      console.log(result)
+      let data:any=result
+      this.estado=result.estado
+      let newElement={
+        id:this.estado,
+        name:this.reemplazarNombre(this.estado)
+      }
+      this.comandaEstado=newElement;
+      this.selectedValue=newElement
+     let cont=0;
+     let bander=true
+     this.estados.forEach(element => {
+       console.log("cont"+cont)
+       console.log(element.id,this.selectedValue.id)
+       if(element.id==this.selectedValue.id && bander==true){
+         let nuevo=this.estados.indexOf(element)
+         console.log("nuevo")
+         console.log(nuevo)
+         console.log(this.estados.length)
+         if(nuevo+1<this.estados.length){
+           this.selectedValue=this.estados[nuevo+1];
+         }else{
+           console.log("else")
+           console.log(nuevo)
+           this.selectedValue=this.estados[nuevo];
+         }
+         
+         console.log("iguales")
+         console.log( this.selectedValue)
+          //this.estados.splice(cont,1)
+          console.log(this.estados)
+        
+          bander=false
+         }
+         cont++;
+         
+     });
+   
+      
+      //this.data=result
+      
+    })
+   this.socket.on("connect", function(){
+     console.log("conectado")
+   }) ;
+   this.socket.on("disconnect", function(){
+     console.log("Disconnect")
+   })
+   let observer={
+     next:(data:Object)=>{
+       this.socket.emit("message",JSON.stringify(data))
+     },
+   };
+    
+ return Rx.Subject.create(observer)
+
 }
 
 }

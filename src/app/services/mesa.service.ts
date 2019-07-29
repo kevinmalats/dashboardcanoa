@@ -27,7 +27,7 @@ export class MesaService {
   // }
   
   getMesaById(id){
-      
+      console.log(id)
       return this.httpClient.post(this.URI+"/id",{id:id})
   }
 
