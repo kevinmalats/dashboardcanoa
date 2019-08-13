@@ -8,7 +8,7 @@
           <th class="text-center">Numero de Mesa</th>
           <th>Estado</th>
           <th class="text-center">Ocupantes</th>
-          
+          <th class="text-center">Ver Facturas</th>
         </tr>
       </thead>
       <tbody>
@@ -49,7 +49,14 @@
                               <div> {{item.ocupantes}} </div>
                               
                             </td>
-              
+                            <td>
+                              
+                      <div class="small text-muted">
+                        <a [routerLink]="['/factura/', item.id]" >
+                        ver detalle de factura</a>
+                      </div>
+                              
+                            </td>
             
           </tr>
         

@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http'
 
 import { MesaService } from './services/mesa.service'
+import { FacturaService } from './services/factura.service'
 // Import containers
 import { DefaultLayoutComponent } from './containers';
 
@@ -42,6 +43,7 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
+
 
 @NgModule({
   imports: [
@@ -72,7 +74,7 @@ import { ChartsModule } from 'ng2-charts';
     provide: LocationStrategy,
     useClass: HashLocationStrategy
   },
-  MesaService],
+  MesaService,FacturaService],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
