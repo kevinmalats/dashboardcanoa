@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import {MesasComponent} from "./mesas.component"
 import {DetalleComponent} from "./detalle/detalle.component"
+import {HistorialComponent} from "./historial/historial.component"
 
 const routes: Routes = [
   {
@@ -15,6 +16,13 @@ const routes: Routes = [
   {
     path: ':id',
     component: DetalleComponent,
+    data: {
+      title: 'Ver'
+    }
+  },
+  {
+    path: 'historial/:id',
+    component: HistorialComponent,
     data: {
       title: 'Ver'
     }

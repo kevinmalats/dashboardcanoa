@@ -1,0 +1,57 @@
+
+<table class="table table-responsive-sm table-hover table-outline mb-0">
+        <thead class="thead-light">
+            <tr>
+              <!-- <th class="text-center"><i class="icon-people"></i></th> -->
+              <th>Inicio Elaboracion</th>
+              <th class="text-center">Fin Elaboracion</th>
+              <th>Inicio Preliminar</th>
+              <th class="text-center">Fin Preliminar</th>
+              <th class="text-center">Tiempo total de atencion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let item of facturas">
+               
+                   
+                       <tr>
+                      <!-- <td class="text-center">
+                          <div class="avatar">
+                            <img src="assets/img/avatars/1.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                            <span class="avatar-status badge-success"></span>
+                          </div>
+                        </td> -->
+                        <td>
+          
+                         
+                          <div class="small text-muted">
+                                <div>{{item.incio_elaboracion}}</div>
+                          </div>
+                        </td>
+                        <td>
+          
+                            <div>{{item.fin_elaboracion}}</div>
+                            <div class="small text-muted">
+                             
+                            </div>
+                          </td>
+                          <td>
+                              <div> {{item.incio_preliminar}} </div>
+                              
+                            </td>
+                            <td>
+                                <div> {{item.fin_preliminar}} </div>
+                                
+                              </td>
+                              <td>
+                                  <div> {{item.tiempo_total}} Minutos </div>
+                                  
+                                </td>
+                                
+                
+              </tr>
+            
+            </ng-container>
+        
+        </tbody>
+      </table>

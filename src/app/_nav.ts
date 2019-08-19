@@ -251,11 +251,11 @@ export const navItems: NavData[] = [
     url: '/mesas',
     icon: 'icon-table',
     children: [
-      {
-        name: 'Create',
-        url: '/mesas/create',
-        icon: 'icon-star'
-      },
+      // {
+      //   name: 'Create',
+      //   url: '/mesas/create',
+      //   icon: 'icon-star'
+      // },
       {
         name: 'Ver Todas',
         url: '/mesas',

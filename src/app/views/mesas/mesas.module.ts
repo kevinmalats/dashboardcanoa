@@ -5,9 +5,10 @@ import { MesasComponent } from './mesas.component';
 import { MesasRoutingModule} from './mesas-routing.module'
 import { MesaService } from './../../services/mesa.service'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { HistorialComponent } from './historial/historial.component';
 
 @NgModule({
-  declarations: [DetalleComponent,MesasComponent],
+  declarations: [DetalleComponent,MesasComponent, HistorialComponent],
   imports: [
     CommonModule,
     MesasRoutingModule,

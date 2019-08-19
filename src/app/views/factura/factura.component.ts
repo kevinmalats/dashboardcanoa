@@ -27,8 +27,18 @@ constructor(private rutaActiva: ActivatedRoute, private FacturaService:FacturaSe
     })
   }
   guardar(){
+    let pedidos:Array<any>= [];
+    for(let i=0; i<this.pedidos.length; i++){
+      pedidos.push(this.pedidos[i])
+    }
+     //pedidos=JSON.stringify(pedidos)
     let body={
-      
+       total:this.valores.total,
+       subtotal:this.valores.subtotal,
+       iva:this.valores.iva,
+       cliente:this.cliente.id,
+       comanda:this.pedidos[0].id_comanda,
+       pedidos:pedidos
     }
     this.FacturaService.create(body)
     .subscribe(response=>{

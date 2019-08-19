@@ -13,6 +13,7 @@ import * as Rx from "rxjs";
 })
 export class DetalleComponent implements OnInit {
  id:any
+ idHist:any
  private socket;
  public data:any
  public mesa:any
@@ -37,6 +38,8 @@ selectedValue =  null
 
   ngOnInit() {
  this.id=this.rutaActiva.snapshot.params.id
+ this.idHist=this.rutaActiva.snapshot.params.id
+ console.log(this.id)
  this.connect()
  console.log("estamos activo"+this.id)
   this.mesaService.getMesaById(this.id)
