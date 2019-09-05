@@ -251,13 +251,65 @@ export const navItems: NavData[] = [
     url: '/mesas',
     icon: 'icon-table',
     children: [
-      // {
-      //   name: 'Create',
-      //   url: '/mesas/create',
-      //   icon: 'icon-star'
-      // },
       {
-        name: 'Ver Todas',
+        name: 'Crear',
+        url: '/mesas/create',
+        icon: 'icon-star'
+      },
+      {
+        name: 'Ver todas',
+        url: '/mesas',
+        icon: 'icon-star'
+      }
+    ] 
+  },
+  {
+    name: 'Usuario',
+    url: '/usuarios',
+    icon: 'icon-table',
+    children: [
+      {
+        name: 'Crear',
+        url: '/mesas/create',
+        icon: 'icon-star'
+      },
+      {
+        name: 'Ver todos',
+        url: '/mesas',
+        icon: 'icon-star'
+      }
+    ] 
+  },
+  {
+    name: 'Menu Comida',
+    url: '/mesas',
+    icon: 'icon-table',
+    children: [
+      {
+        name: 'Crear',
+        url: '/mesas/create',
+        icon: 'icon-star'
+      },
+      {
+        name: 'Ver todos Los Menus',
+        url: '/mesas',
+        icon: 'icon-star'
+      }
+    ] 
+  },
+  
+  {
+    name: 'Rol',
+    url: '/mesas',
+    icon: 'icon-table',
+    children: [
+      {
+        name: 'Crear Rol',
+        url: '/mesas/create',
+        icon: 'icon-star'
+      },
+      {
+        name: 'Ver todos los roles',
         url: '/mesas',
         icon: 'icon-star'
       }
